@@ -56,10 +56,11 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity, Vector3.UP, true)
 
 func die():
-	player_state == DEAD
-	var dead_player = player_body.instance()
-	dead_player.global_translation = global_translation
-	dead_player.rotation_degrees = rotation_degrees
-	get_tree().get_root().add_child(dead_player)
-	dead_player.die()
+	if player_state != DEAD:
+		player_state = DEAD
+		var dead_player = player_body.instance()
+		dead_player.global_translation = global_translation
+		dead_player.rotation_degrees = rotation_degrees
+		get_tree().get_root().add_child(dead_player)
+		dead_player.die()
 	
